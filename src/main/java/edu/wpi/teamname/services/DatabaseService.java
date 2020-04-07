@@ -1,5 +1,6 @@
 package edu.wpi.teamname.services;
 
+import com.google.inject.Inject;
 import java.sql.*;
 
 public class DatabaseService {
@@ -9,7 +10,8 @@ public class DatabaseService {
 
   private Connection connection;
 
-  public DatabaseService() {
+  @Inject
+  public DatabaseService(String dbUrl) {
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
     } catch (ClassNotFoundException e) {
@@ -19,7 +21,7 @@ public class DatabaseService {
 
     // remove :memory to have persistent database
     try {
-      connection = DriverManager.getConnection("jdbc:derby:memory:myDB;create=true");
+      connection = DriverManager.getConnection(dbUrl);
     } catch (SQLException e) {
       e.printStackTrace();
       return;

@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class DatabaseServiceTest {
 
-  private DatabaseService db = new DatabaseService();
+  private DatabaseService db = new DatabaseService("jdbc:derby:memory:myDb;create=true");
 
   @Test
   public void testGetEmployeeName() {

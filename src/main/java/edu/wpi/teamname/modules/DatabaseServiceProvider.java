@@ -1,6 +1,7 @@
 package edu.wpi.teamname.modules;
 
 import com.google.inject.AbstractModule;
+import edu.wpi.teamname.annotations.JdbcUrl;
 import edu.wpi.teamname.services.DatabaseService;
 
 public class DatabaseServiceProvider extends AbstractModule {
@@ -12,5 +13,6 @@ public class DatabaseServiceProvider extends AbstractModule {
   @Override
   protected void configure() {
     bind(DatabaseService.class).asEagerSingleton();
+    bind(String.class).annotatedWith(JdbcUrl.class).toInstance("jdbc:derby:myDb;create=true");
   }
 }
